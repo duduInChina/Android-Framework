@@ -6,4 +6,15 @@ package cn.duduinchina.android_framework;
  */
 
 public class AppConstant {
+
+    /**
+     * 域名
+     */
+    public static String API_BASE_URL = "http://www.duduinchina.cn/api.php/";
+
+    /**
+     * SharedPreferenceswens设置名称
+     */
+    public static final String SP_NAME = "SP_Android_Framework";
+
 }
