@@ -3,6 +3,7 @@ package cn.duduinchina.android_framework.model.source;
 import cn.duduinchina.android_framework.model.entity.LoginData;
 import cn.duduinchina.android_framework.model.source.local.LoginLocalDataSource;
 import cn.duduinchina.android_framework.model.source.remote.LoginRemoteDataSource;
+import cn.duduinchina.android_framework.model.source.remote.base.Transformers;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
@@ -44,11 +45,27 @@ public class LoginRepository implements LoginDataSource {
                         mLoginLocalDataSource.saveLoginInfo(loginData);
                         return loginData;
                     }
-                });
+                }).compose(Transformers.<LoginData>netWorkSchedulers());
     }
 
+    /**
+     * 保存相关数据
+     * @param loginData
+     */
     @Override
     public void saveLoginInfo(LoginData loginData) {
 
     }
+
+    public Observable<LoginData> getToken(){
+        return mLoginRemoteDataSource.login("admin", "123456")
+                .map(new Function<LoginData, LoginData>() {
+                    @Override
+                    public LoginData apply(@NonNull LoginData loginData) throws Exception {
+                        mLoginLocalDataSource.saveLoginInfo(loginData);
+                        return loginData;
+                    }
+                }).compose(Transformers.<LoginData>netWorkSchedulers());
+    }
+
 }
