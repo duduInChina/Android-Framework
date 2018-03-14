@@ -31,8 +31,8 @@ import retrofit2.http.POST;
 
 public interface LoginApi {
 
-//    @FormUrlEncoded
-    @GET("Index")
-    Observable<LoginData> login();
+    @FormUrlEncoded
+    @POST("login")
+    Observable<LoginData> login(@FieldMap Map<String,String> map);
 
 }

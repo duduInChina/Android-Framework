@@ -36,9 +36,9 @@ public class LoginRemoteDataSource implements LoginDataSource {
 
         Map<String,String> map = new HashMap<>();
         map.put("name",name);
-        map.put("pwd",pwd);
+        map.put("password",pwd);
 
-        return mLoginApi.login();
+        return mLoginApi.login(map);
     }
 
     @Override
