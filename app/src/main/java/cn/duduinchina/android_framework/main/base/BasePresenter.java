@@ -27,7 +27,7 @@ public abstract class BasePresenter {
         }
     }
 
-    private CompositeDisposable getSubscription(){
+    protected CompositeDisposable getSubscription(){
         return mSubscription;
     }
 

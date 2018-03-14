@@ -35,7 +35,10 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
     @Override
     public void login() {
-        mLoginRepository.login("admin","123456")
+        //注意添加，以免内存泄漏
+        getSubscription().add(
+
+                mLoginRepository.login("admin","123456")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -53,6 +56,9 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
                             }
                         }
 
-                );
+                )
+
+        );
+
     }
 }
